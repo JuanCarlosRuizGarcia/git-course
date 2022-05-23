@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>UserName</th>
+					<th>Email</th>
+					<th>Phone</th>
+				</tr>
+			</thead>
+			<tbody id="data">
+
+			</tbody>
+		</table>
+	</div>
+
+	<script>
+		let URL = 'https://jsonplaceholder.typicode.com/users';
+
+		fetch(URL)
+			.then(response => response.json())
+			.then(users => {
+				console.log(users);
+				users.forEach(user => {
+					let row = document.createElement("tr");
+					let cellId = document.createElement("td");
+					let cellName = document.createElement("td");
+					cell.appendChild(document.createTextNode(`${user.id}`));
+					row.appendChild(cell);
+					document.getElementById("data").appendChild(row);
+				});
+
+				const tpl = users.map(user => `<tr>
+					<td>${user.id}</td>
+					<td>${user.name}</td>
+					<td>${user.username}</td>
+					<td>${user.email}</td>
+					<td>${user.phone}</td>
+				</tr>`);
+
+				let app = document.getElementById("data");
+				app.innertHTML = `${tpl}`;
+			})
+			.catch(error => console.log(error));
+	</script>
+</body>
+</html>
